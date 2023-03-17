@@ -365,7 +365,113 @@ Bu düzenli ifade, "DT" (belirteç) etiketi, "JJ" (sıfat) etiketi ve "NN" (isim
 Böylece, NP etiketini taşıyan bir yapıda belirteç olabilir veya olmayabilir, ardından sıfır veya daha fazla sıfat, ardından sıfır veya daha fazla isim gelebilir. Örneğin "the big red ball" ifadesi, NP etiketiyle etiketlenecektir çünkü "the" belirteci, "big" ve "red" sıfatları ve "ball" ismi içerir ve bu düzenli ifade tarafından yakalanacaktır.
 
 
-## Named entity recognition
+## Named Entity Recognition
+
+Named Entity Recognition (NER), doğal dil işlemede (NLP) bir alt dalıdır. Metin belgelerindeki isimlere, organizasyonlara, yerlere, tarihler gibi özel isimlere ilişkin yapısal bilgileri belirlemeyi amaçlar. Bu yapısal bilgiler, bilgi çıkarma, otomatik özetleme, çeviri gibi birçok NLP görevinde önemli bir rol oynar.
+
+Örneğin, bir NER sistemi, "Elon Musk, Tesla Motors'un CEO'sudur ve 1971'de Güney Afrika'da doğdu." cümlesindeki "Elon Musk", "Tesla Motors" ve "Güney Afrika" gibi özel isimleri tanıyabilir ve bunları "Kişi", "Şirket" ve "Yer" gibi kategorilere ayırabilir.
+
+NER sistemleri, genellikle öğrenme tabanlı yaklaşımlar kullanır. Bu yaklaşımlar, genellikle etiketlenmiş örnek verileri kullanarak özel isimleri tanımak için kurallar veya istatistiksel modeller oluştururlar. Bu modeller, dilbilgisi kurallarına veya sözlüklere dayanarak, özel isimlerin nerede başladığını ve bittiğini belirlemek için çeşitli özellikler kullanır.
+
+Named-entity recognition tools: NLTK, spaCy, General Architecture for Text Engineering (GATE) — ANNIE, Apache OpenNLP, Stanford CoreNLP, DKPro Core, MITIE, Watson Natural Language Understanding, TextRazor, FreeLing are described in the “NER” sheet of the table.
+
+~~~~
+python -m spacy download en_core_web_sm
+~~~~
+
+
+~~~~python
+import spacy
+
+# SpaCy modelini yükleyin
+nlp = spacy.load("en_core_web_sm")
+
+# Metni işleyin
+text = "Apple is looking at buying U.K. startup for $1 billion"
+doc = nlp(text)
+
+# Varlıkları etiketleyin ve yazdırın
+for entity in doc.ents:
+    print(entity.text, entity.label_)
+~~~~
+
+~~~~
+Apple ORG
+U.K. GPE
+$1 billion MONEY
+~~~~
+
+Yukarıdaki örnekte, "Apple" bir organizasyon (ORG), "U.K." bir coğrafi yer (GPE) ve "$1 billion" bir para birimi (MONEY) olarak etiketlenmiştir.
+
+Bu kodu başka metinlerle de deneyebilirsiniz. Ancak, daha büyük metinler için SpaCy'nin yüksek hesaplama gücü gerektirdiğini ve bazı durumlarda modelin yanlış sonuçlar üretebilir.
+
+~~~~python
+import nltk
+
+# NLTK'nin içerisinde bulunan 'punkt' ve 'averaged_perceptron_tagger' modüllerini indirin.
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+
+# Verilen metin
+text = "Elon Musk, the CEO of Tesla, is worth over $200 billion and has plans to colonize Mars with SpaceX."
+
+# Metin parçalara ayrılır (tokenize)
+tokens = nltk.word_tokenize(text)
+
+# Parçaların etiketleri belirlenir (POS tagging)
+tagged = nltk.pos_tag(tokens)
+
+# NER yapılır
+entities = nltk.chunk.ne_chunk(tagged)
+
+# NER sonuçları ekrana yazdırılır
+for entity in entities:
+    if hasattr(entity, 'label'):
+        print(entity.label() + ": " + " ".join([word for word, tag in entity.leaves()]))
+~~~~
+
+~~~~
+PERSON: Elon
+GPE: Musk
+ORGANIZATION: CEO
+GPE: Tesla
+PERSON: Mars
+ORGANIZATION: SpaceX
+~~~~
+
+
+
+## Coreference Resolution
+
+Coreference resolution, bir metinde geçen isimlerin, zamirlerin ve diğer kelime öbeklerinin aynı gerçek dünya nesnesine veya kavrama atıfta bulunduğu durumları tespit etmek ve belirlemektir. Yani, bir metindeki farklı kelime öbekleri gerçekte aynı nesneyi ifade ediyorsa, bu kelime öbekleri arasında bir ilişki olduğunu ve bunların aynı referansa işaret ettiğini tespit etmeye çalışır.
+
+Örneğin, "John went to the store. He bought some milk." cümlesinde, "he" zamiri "John" ismi ile aynı kişiye işaret etmektedir. Coreference resolution, bu ilişkiyi tespit ederek, "he" kelimesinin "John" ismi ile aynı kişiyi ifade ettiğini belirleyebilir.
+
+Coreference resolution, doğal dil işleme, makine öğrenimi ve yapay zeka alanlarında kullanılır. Özellikle, metin anlama, makine çevirisi ve diyalog sistemleri gibi uygulamalarda önemlidir.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
