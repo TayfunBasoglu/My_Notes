@@ -50,11 +50,20 @@ print(text_without_punct)
 ~~~~
 
 
+# Remove Whitespaces (Extra)
 
+~~~~python
+def remove_duplicate_whitespace(text):
+    return ' '.join(text.split())
 
+text = "   Hello,   World!   How are you doing   today?   "
+text_cleaned = remove_duplicate_whitespace(text)
+print(text_cleaned)
+~~~~
 
-
-
+~~~~
+Hello, World! How are you doing today?
+~~~~
 
 
 
