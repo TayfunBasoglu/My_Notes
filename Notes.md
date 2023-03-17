@@ -1,3 +1,10 @@
+# Nltk Nedir ?
+
+NLTK (Natural Language Toolkit) bir doğal dil işleme (NLP) kütüphanesidir ve Python programlama dilinde kullanılabilir. NLTK, metin verileriyle çalışmak için bir dizi araç sağlar ve çeşitli NLP görevlerini gerçekleştirmek için kullanılabilir. Bu görevler arasında metin önişleme (örneğin, tokenizasyon, stop word removal), kelime dağarcığı oluşturma, konuşma tanıma, kelime öbekleme, dil modelleri, sınıflandırma, etiketleme ve sentezleme gibi işlemler yer alır.
+
+NLTK'nin amacı, doğal dil verilerini işlemeyi kolaylaştırmak ve NLP araştırmacıları ve uygulayıcıları için bir dizi araç sağlamaktır. Bu kütüphane, öğrenme kaynakları ve kod örnekleri gibi çeşitli kaynaklara erişebilir ve doğal dil işleme konusunda birçok farklı problemi ele almak için kullanılabilir.
+
+
 # Text Preprocessing
 
 ## Lower - Upper
@@ -64,6 +71,37 @@ print(text_cleaned)
 ~~~~
 Hello, World! How are you doing today?
 ~~~~
+
+
+# Left-Right Whitespaces
+
+~~~~python
+def remove_chars(text, chars):
+    return text.strip(chars)
+
+text = "   Hello, World! How are you doing today?   "
+text_cleaned = remove_chars(text, " ,!")
+print(text_cleaned)
+~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
