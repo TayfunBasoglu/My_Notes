@@ -57,7 +57,7 @@ print(text_without_punct)
 ~~~~
 
 
-# Remove Whitespaces (Extra)
+## Remove Whitespaces (Extra)
 
 ~~~~python
 def remove_duplicate_whitespace(text):
@@ -73,7 +73,7 @@ Hello, World! How are you doing today?
 ~~~~
 
 
-# Left-Right Whitespaces
+## Left-Right Whitespaces
 
 ~~~~python
 def remove_chars(text, chars):
