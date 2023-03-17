@@ -24,11 +24,30 @@ result = re.sub(r'\d+', '', input_str)
 print(result)
 ~~~~
 
+## Just Numbers
+
+~~~~python
+import re
+input_str = "4 Apple and 5 dogs"
+result = re.findall(r'\d+', input_str)
+print(result)
+~~~~
 
 
+## Remove Punctuation
 
+~~~~python
+import string
 
+def remove_punctuation(text):
+    translator = str.maketrans('', '', string.punctuation)
+    return text.translate(translator)
 
+text = "Hello, World! $?=How are you doing today?"
+text_without_punct = remove_punctuation(text)
+print(text_without_punct)
+
+~~~~
 
 
 
