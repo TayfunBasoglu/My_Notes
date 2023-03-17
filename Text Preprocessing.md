@@ -444,7 +444,7 @@ Coreference resolution, doğal dil işleme, makine öğrenimi ve yapay zeka alan
 
 
 
-
+# Relationship extraction
 
 
 
