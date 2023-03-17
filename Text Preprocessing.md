@@ -13,7 +13,7 @@ print(input_str)
 ~~~~
 
 
-## Remove Numbers
+# Remove Numbers
 
 ~~~~python
 import re
@@ -22,7 +22,7 @@ result = re.sub(r'\d+', '', input_str)
 print(result)
 ~~~~
 
-## Just Numbers
+# Just Numbers
 
 ~~~~python
 import re
@@ -48,7 +48,7 @@ print(text_without_punct)
 ~~~~
 
 
-## Remove Whitespaces (Extra)
+# Remove Whitespaces (Extra)
 
 ~~~~python
 def remove_duplicate_whitespace(text):
@@ -64,7 +64,7 @@ Hello, World! How are you doing today?
 ~~~~
 
 
-## Left-Right Whitespaces
+# Left-Right Whitespaces
 
 ~~~~python
 def remove_chars(text, chars):
@@ -77,7 +77,7 @@ print(text_cleaned)
 
 
 
-## Stop Words
+# Stop Words
 
 Dilde sık kullanılan, ancak analiz sırasında anlamsal olarak önemsiz olan kelimelerdir. Örnek olarak İngilizce'deki "the", "a", "an", "and", "in", "on" gibi kelimeler verilebilir.
 
@@ -114,7 +114,7 @@ merhaba , bugün güzel bir gün garip . hava harika dışarıda yürüyüş yap
 
 
 
-## Stemming
+# Stemming
 
 Stemming, doğal dil işleme (NLP) için yapılan bir ön işleme adımıdır ve kelime köklerini bulmak için kullanılır. Özellikle metin sınıflandırması, bilgi alımı, indeksleme gibi NLP uygulamalarında sıklıkla kullanılır.
 
@@ -167,7 +167,7 @@ print(kokbul1.stemWords('herkes herkesin'.split()))
 ~~~~
 
 
-## Lemmatization
+# Lemmatization
 
 Lemmatization, doğal dil işleme (NLP) alanında kullanılan bir yöntemdir. Amacı, bir kelimeyi kelimenin köküne veya lemmasına dönüştürmektir. Bu, bir kelimenin farklı şekillerini tek bir temsilciyle eşleştirmeye ve daha doğru bir analiz yapmaya olanak tanır.
 
@@ -205,7 +205,7 @@ women -> woman
 
 
 
-## Part of speech tagging
+# Part of speech tagging
 
 Part of speech tagging, doğal dil işleme (NLP) alanında, bir cümledeki her kelimenin dilbilgisel olarak hangi gruba ait olduğunu belirlemek için kullanılan bir tekniktir. Bu gruplar, isim, sıfat, zarf, fiil, edat, bağlaç, ünlem gibi dilbilgisel yapılar olabilir.
 
@@ -277,7 +277,7 @@ print(tagged)
 
 
 
-## Chunking
+# Chunking
 
 Kelimeleri veya kelimelerin gruplarını, anlamsal olarak bir arada olan ve belirli bir yapı oluşturan parçalara (chunk) ayırma işlemidir. Bu parçalar genellikle "kelime öbekleri" veya "cümle öbekleri" olarak adlandırılır ve daha büyük bir metnin anlamını daha kolay anlaşılabilir ve yorumlanabilir parçalara böler.
  
@@ -356,7 +356,7 @@ Bu düzenli ifade, "DT" (belirteç) etiketi, "JJ" (sıfat) etiketi ve "NN" (isim
 Böylece, NP etiketini taşıyan bir yapıda belirteç olabilir veya olmayabilir, ardından sıfır veya daha fazla sıfat, ardından sıfır veya daha fazla isim gelebilir. Örneğin "the big red ball" ifadesi, NP etiketiyle etiketlenecektir çünkü "the" belirteci, "big" ve "red" sıfatları ve "ball" ismi içerir ve bu düzenli ifade tarafından yakalanacaktır.
 
 
-## Named Entity Recognition
+# Named Entity Recognition
 
 Named Entity Recognition (NER), doğal dil işlemede (NLP) bir alt dalıdır. Metin belgelerindeki isimlere, organizasyonlara, yerlere, tarihler gibi özel isimlere ilişkin yapısal bilgileri belirlemeyi amaçlar. Bu yapısal bilgiler, bilgi çıkarma, otomatik özetleme, çeviri gibi birçok NLP görevinde önemli bir rol oynar.
 
@@ -434,7 +434,7 @@ ORGANIZATION: SpaceX
 
 
 
-## Coreference Resolution
+# Coreference Resolution
 
 Coreference resolution, bir metinde geçen isimlerin, zamirlerin ve diğer kelime öbeklerinin aynı gerçek dünya nesnesine veya kavrama atıfta bulunduğu durumları tespit etmek ve belirlemektir. Yani, bir metindeki farklı kelime öbekleri gerçekte aynı nesneyi ifade ediyorsa, bu kelime öbekleri arasında bir ilişki olduğunu ve bunların aynı referansa işaret ettiğini tespit etmeye çalışır.
 
