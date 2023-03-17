@@ -123,7 +123,7 @@ merhaba , bugün güzel bir gün garip . hava harika dışarıda yürüyüş yap
 
 
 
-    ## Stemming
+## Stemming
 
 Stemming, doğal dil işleme (NLP) için yapılan bir ön işleme adımıdır ve kelime köklerini bulmak için kullanılır. Özellikle metin sınıflandırması, bilgi alımı, indeksleme gibi NLP uygulamalarında sıklıkla kullanılır.
 
@@ -214,16 +214,74 @@ women -> woman
 
 
 
+## Part of speech tagging
+
+Part of speech tagging, doğal dil işleme (NLP) alanında, bir cümledeki her kelimenin dilbilgisel olarak hangi gruba ait olduğunu belirlemek için kullanılan bir tekniktir. Bu gruplar, isim, sıfat, zarf, fiil, edat, bağlaç, ünlem gibi dilbilgisel yapılar olabilir.
+
+Part of speech tagging, kelimenin anlamını ve cümlenin yapısını anlamak için önemlidir. Örneğin, "kitap okuyorum" cümlesinde "kitap" kelimesi isim, "okuyorum" kelimesi ise fiil olarak etiketlenebilir. Bu etiketleme işlemi, dilbilgisel analiz için bir ön işlemdir ve çeşitli NLP uygulamalarında kullanılır.
+
+Pek çok kütüphane örneği var. ( NLTK, spaCy, TextBlob, Pattern, Stanford CoreNLP, Memory-Based Shallow Parser (MBSP), Apache OpenNLP, Apache Lucene, General Architecture for Text Engineering (GATE), FreeLing, Illinois Part of Speech Tagger, and DKPro Core.)
 
 
+~~~~python
+import nltk
 
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
+sentence = "I am learning natural language processing with Python"
 
+tokens = nltk.word_tokenize(sentence)
+tagged = nltk.pos_tag(tokens)
 
+print(tagged)
+~~~~
 
+~~~~
+[('I', 'PRP'),
+('am', 'VBP'),
+('learning', 'VBG'),
+('natural', 'JJ'),
+('language', 'NN'),
+('processing', 'NN'),
+('with', 'IN'),
+('Python', 'NNP')]
+~~~~
 
-
-
+* CC: Bağlaç (örneğin, "and", "but", "or")
+* CD: Sayı (örneğin, "one", "two", "three")
+* DT: Belirteç (örneğin, "the", "this", "that")
+* EX: Belirteç (örneğin, "there")
+* FW: Yabancı kelime
+* IN: Edat (örneğin, "in", "on", "at")
+* JJ: Sıfat (örneğin, "big", "happy", "red")
+* JJR: Sıfat, karşılaştırma (örneğin, "bigger", "more interesting")
+* JJS: Sıfat, en üstlük (örneğin, "biggest", "most interesting")
+* LS: Liste işareti (örneğin, "1)", "2)", "3)")
+* MD: Yardımcı fiil (örneğin, "can", "may", "should")
+* NN: İsim, tekil (örneğin, "dog", "book", "city")
+* NNS: İsim, çoğul (örneğin, "dogs", "books", "cities")
+* NNP: İsim, tekil ve özel ad (örneğin, "John", "London", "Python")
+* NNPS: İsim, çoğul ve özel ad (örneğin, "Smiths", "Mycroft Holmes")
+* PDT: Ön belirleyici (örneğin, "all", "both", "many")
+* POS: İşaret fiili (örneğin, "'s", "s'")
+* PRP: Zamir (örneğin, "I", "you", "he/she/it", "we", "they")
+* PRP$: İşaret zamiri, sahip (örneğin, "my", "your", "his/her/its", "our", "their")
+* RB: Zarf (örneğin, "quickly", "very", "often")
+* RBR: Zarf, karşılaştırma (örneğin, "faster", "more quickly")
+* RBS: Zarf, en üstlük (örneğin, "fastest", "most quickly")
+* RP: Sonek (örneğin, "up", "off", "out")
+* SYM: Sembol (örneğin, "+", "-", "$")
+* TO: Belirleyici (örneğin, "to")
+* UH: Ünlemler (örneğin, "oh", "wow", "ouch")
+* VB: Fiil, taban formu (örneğin, "run", "eat", "write")
+* VBD: Fiil, geçmiş zaman (örneğin, "ran", "ate", "wrote")
+* VBG: Fiil, şimdiki zaman, -ing ekli (örneğin, "running", "eating", "writing")
+* VBN: Fiil, sıfat fiil, geçmiş zaman (örneğin, "run", "eaten", "written")
+* WDT: Belirleyici zamir (örneğin, "which", "that")
+* WP: Soru zamiri (örneğin, "who", "what", "which")
+* WP$: Soru zamiri, sahip (örneğin, "whose")
+* WRB: Soru zarfı (örneğin, "when", "where", "why")
 
 
 
