@@ -286,23 +286,86 @@ print(tagged)
 
 
 
+## Chunking
+
+Kelimeleri veya kelimelerin gruplarını, anlamsal olarak bir arada olan ve belirli bir yapı oluşturan parçalara (chunk) ayırma işlemidir. Bu parçalar genellikle "kelime öbekleri" veya "cümle öbekleri" olarak adlandırılır ve daha büyük bir metnin anlamını daha kolay anlaşılabilir ve yorumlanabilir parçalara böler.
+ 
+Chunking, genellikle bir ön işleme adımı olarak kullanılır ve diğer doğal dil işleme teknikleriyle birlikte kullanılır. Bu teknik, dilbilgisi kuralları, kelime öbekleri, POS (kelime türü) etiketleri ve diğer özellikler gibi belirli öğeleri dikkate alarak cümleyi küçük parçalara ayırır. Bu sayede, cümlelerin anlamsal yapıları daha net bir şekilde ortaya çıkar ve daha doğru bir şekilde analiz edilebilir. Chunking, özellikle bilgi çıkarma, metin sınıflandırma ve duyum analizi gibi uygulamalarda sıklıkla kullanılır.
+
+~~~~python
+import nltk
+
+# Örnek metni tanımla
+text = "I have a dog named Max. He is a black Labrador Retriever. Max loves to play fetch with his tennis ball."
+
+# Metni kelimelere ayır
+tokens = nltk.word_tokenize(text)
+
+# Kelimelerin her birine POS etiketi ata
+tagged_tokens = nltk.pos_tag(tokens)
+
+# Chunking işlemi için bir grammar tanımla
+grammar = r"""
+    NP: {<DT>?<JJ>*<NN>}  # Belirteç, sıfatlar ve isimden oluşan bir NP
+    VP: {<MD>?<VB.*>+}   # Yardımcı fiil veya sıfat-fiil ve sonuna kadar olan fiillerden oluşan bir VP
+    """
+
+# ChunkParser nesnesini oluştur
+cp = nltk.RegexpParser(grammar)
+
+# Chunking işlemi için metnin etiketlenmiş kelimelerini kullanarak ağaçları oluştur
+tree = cp.parse(tagged_tokens)
+
+# Oluşturulan ağacı ekrana yazdır
+print(tree)
+~~~~
+ 
+
+~~~~
+(S
+  I/PRP
+  (VP have/VBP)
+  (NP a/DT dog/NN)
+  (VP named/VBN)
+  Max/NNP
+  
+  ./.
+  
+  He/PRP
+  (VP is/VBZ)
+  a/DT
+  black/JJ
+  Labrador/NNP
+  Retriever/NNP
+  
+  ./.
+  
+  Max/NNP
+  (VP loves/VBZ)
+  to/TO
+  (VP play/VB)
+  (NP fetch/NN)
+  with/IN
+  his/PRP$
+  (NP tennis/NN)
+  (NP ball/NN)
+  ./.)
+~~~~
+
+Grammar değişkeni, yukarıda bahsettiğimiz dil bilgisi kurallarının (grammar rules) tanımlandığı bir yapıdır. Bu yapı, dilin yapısını ve sözdizimini belirleyen kuralların bir listesini içerir. grammar değişkeninde kullanılan kurallar, sözcüklerin ve sözcük gruplarının nasıl bir araya gelebileceğini belirler ve bu sayede dil işleme (NLP) işlemlerinde kullanılır.
+
+Örneğin, grammar değişkenindeki ifade 
+
+    NP: {<DT>?<JJ>*<NN>*}
+
+Bu regular expression (düzenli ifade), NP (isim öbeği) olarak etiketlenen yapıları yakalamak için kullanılmaktadır.
+
+Bu düzenli ifade, "DT" (belirteç) etiketi, "JJ" (sıfat) etiketi ve "NN" (isim) etiketi içeren kelimeleri yakalamak için bir desen belirler. "?" sembolü, "DT" etiketinin var olabileceğini veya olmayabileceğini ifade eder. "\*" sembolü, "JJ" veya "NN" etiketlerinin sıfır veya daha fazla kez tekrarlanabileceğini ifade eder.
+
+Böylece, NP etiketini taşıyan bir yapıda belirteç olabilir veya olmayabilir, ardından sıfır veya daha fazla sıfat, ardından sıfır veya daha fazla isim gelebilir. Örneğin "the big red ball" ifadesi, NP etiketiyle etiketlenecektir çünkü "the" belirteci, "big" ve "red" sıfatları ve "ball" ismi içerir ve bu düzenli ifade tarafından yakalanacaktır.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Named entity recognition
 
 
 
