@@ -86,6 +86,160 @@ print(text_cleaned)
 
 
 
+## Stop Words
+
+Dilde sık kullanılan, ancak analiz sırasında anlamsal olarak önemsiz olan kelimelerdir. Örnek olarak İngilizce'deki "the", "a", "an", "and", "in", "on" gibi kelimeler verilebilir.
+
+Stopwords, bir metnin boyutunu azaltmak, işlem zamanını azaltmak ve daha net sonuçlar elde etmek için metinden çıkarılabilir. Ancak, bazı NLP görevleri, özellikle duygu analizi veya sosyal medya analizi gibi görevlerde stopwords'ların önemli olduğu durumlar vardır. Bu nedenle, stopwords kullanılıp kullanılmayacağına karar vermek, analiz yapılacak metne ve kullanılacak NLP tekniklerine bağlıdır.
+
+~~~~
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import nltk
+nltk.download('punkt')
+
+text = "Merhaba, bugün güzel bir gün ama garip. Hava harika ve dışarıda yürüyüş yapmak istiyorum."
+text = text.lower()
+
+# Stopwords List
+stop_words = set(stopwords.words("turkish"))
+
+# Split
+words = word_tokenize(text)
+
+# Remove Stopwords
+filtered_words = [word for word in words if word not in stop_words]
+
+# Join and print
+filtered_text = ' '.join(filtered_words)
+print(filtered_text)
+~~~~
+
+~~~~
+merhaba , bugün güzel bir gün garip . hava harika dışarıda yürüyüş yapmak istiyorum .
+~~~~
+
+
+
+
+    ## Stemming
+
+Stemming, doğal dil işleme (NLP) için yapılan bir ön işleme adımıdır ve kelime köklerini bulmak için kullanılır. Özellikle metin sınıflandırması, bilgi alımı, indeksleme gibi NLP uygulamalarında sıklıkla kullanılır.
+
+Stemming, bir kelimenin çekim eklerini kaldırarak kelimenin kök halini bulmaya çalışır. Örneğin, "played", "playing" ve "plays" kelimelerinin hepsi "play" kelimesinin köküdür. Bu nedenle stemming, bir kelimenin farklı çekim formlarını aynı kelime olarak kabul ederek, kelime sayısını azaltır ve analiz sürecini hızlandırır.
+
+Stemming, bir kelimeyi kök haline getirirken, kelime yapısından yola çıkarak kelimeyi kesme yöntemidir. Yani kelimenin eklerini atarak kök haline getirir. Bu nedenle, stemming yöntemi daha basit ve hızlıdır, ancak kesin sonuçlar vermez. Örneğin, "koşuyor", "koştu" ve "koşacağız" kelimeleri "koş" köküne indirgenir. Bu, bazı durumlarda kelimenin anlamının bozulmasına neden olabilir.
+
+~~~~python
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+
+porter = PorterStemmer()
+
+text = "I am playing with playing games"
+
+# tokenize the text
+words = word_tokenize(text)
+
+for word in words:
+    # apply stemming to each word
+    print(porter.stem(word))
+~~~~
+
+~~~~
+i
+am
+play
+with
+play
+game
+~~~~
+
+
+**Türkçe**
+
+~~~~python
+from snowballstemmer import stemmer
+
+kokbul1 = stemmer('turkish')
+
+print(kokbul1.stemWords('vardır var'.split()))
+print(kokbul1.stemWords('bildirgeyi bildirgede'.split()))
+print(kokbul1.stemWords('herkes herkesin'.split()))
+~~~~
+
+~~~~
+'var', 'var']
+['bildirge', 'bildirge']
+['herkes', 'herke']
+~~~~
+
+
+## Lemmatization
+
+Lemmatization, doğal dil işleme (NLP) alanında kullanılan bir yöntemdir. Amacı, bir kelimeyi kelimenin köküne veya lemmasına dönüştürmektir. Bu, bir kelimenin farklı şekillerini tek bir temsilciyle eşleştirmeye ve daha doğru bir analiz yapmaya olanak tanır.
+
+Örneğin, "koşuyor", "koştu", "koşacak" ve "koşmak" kelimesi "koşmak" kelimesinin farklı şekilleridir. Ancak, hepsinin temel anlamı aynıdır. Lemmatization, bu kelimeleri "koşmak" kelimesine dönüştürerek aynı temsilciyle eşleştirmeyi sağlar.
+
+Lemmatization, stemming ile karıştırılmamalıdır. Stemming, kelimenin kökünü bulmak için hepsini keser ve lemmasına göre daha basit bir yöntemdir. Lemmatization ise, dilbilgisi kurallarını kullanarak kelimenin lemmasına dönüştürür ve bu nedenle daha karmaşık bir işlemdir.
+
+Lemmatization, kelimenin morfolojik analizini yaparak kelimenin temel anlamını korur. Bu nedenle, lemmatization daha karmaşık ve yavaştır, ancak daha doğru sonuçlar verir. Kelimenin dilbilgisi yapılarını analiz ederek, kelimenin sözlükteki temel haline yani lemma haline dönüştürür. Örneğin, "koşuyor", "koştu" ve "koşacağız" kelimeleri "koşmak" kelimesine dönüştürülür. Bu, kelimenin anlamını koruyarak daha doğru sonuçlar elde edilmesini sağlar.
+Lemmatization, kelimenin morfolojik analizini yaparak kelimenin temel anlamını korur. Bu nedenle, lemmatization daha karmaşık ve yavaştır, ancak daha doğru sonuçlar verir. Kelimenin dilbilgisi yapılarını analiz ederek, kelimenin sözlükteki temel haline yani lemma haline dönüştürür. Örneğin, "koşuyor", "koştu" ve "koşacağız" kelimeleri "koşmak" kelimesine dönüştürülür. Bu, kelimenin anlamını koruyarak daha doğru sonuçlar elde edilmesini sağlar.
+
+~~~~python
+import nltk
+from nltk.stem import WordNetLemmatizer
+
+nltk.download('wordnet')
+
+lemmatizer = WordNetLemmatizer()
+
+words = ['cats', 'dogs', 'horses', 'wolves', 'children', 'men', 'women']
+
+for word in words:
+    print(f"{word} -> {lemmatizer.lemmatize(word)}")
+~~~~
+
+~~~~
+cats -> cat
+dogs -> dog
+horses -> horse
+wolves -> wolf
+children -> child
+men -> men
+women -> woman
+~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
